@@ -4,7 +4,6 @@
 #include "engine.h"
 #include "window.h"
 
-
 Window *window_create(char *title, int width, int height){
     Window *window;
     window = malloc(sizeof(Window));
@@ -25,6 +24,12 @@ Window *window_create(char *title, int width, int height){
     /* Automatically make new window currect */
     glfwMakeContextCurrent(window->handle);
     return window;
+}
+
+void window_free(Window *window){
+    if(window != NULL){
+        free(window);
+    }
 }
 
 void window_close(Window *window){
@@ -72,6 +77,6 @@ unsigned int window_get_height(Window *window){
     return height;
 }
 
-unsigned int window_get_fullscreen(Window *window){
-    return glfwGetWindowMonitor(window->handle) != NULL;
+int window_should_close(Window *window){
+    return glfwWindowShouldClose(window->handle);
 }

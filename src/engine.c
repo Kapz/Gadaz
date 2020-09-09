@@ -1,11 +1,22 @@
-#include "engine.h"
-
+#include <stdio.h>
 #include <GLFW/glfw3.h>
 
-int init_engine(){
+#include "engine.h"
+
+int engine_init(void){
     glfwInit();
+
+    debugOutput = stdout;
 }
 
-int cleanup_engine(){
+int engine_cleanup(void){
     glfwTerminate();
+}
+
+int engine_logs(const char *data){
+    return fputs(data, debugOutput);
+}
+
+void engine_set_debug_fd(FILE *fd){
+    debugOutput = fd;
 }
