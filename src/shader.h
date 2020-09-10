@@ -1,0 +1,24 @@
+#ifndef SHADER_H
+#define SHADER_H
+
+#include <GL/glew.h>
+#include <stdlib.h>
+
+typedef struct Shader{
+    GLuint vertexShader;
+    GLuint fragmentShader;
+    GLuint program;
+}Shader;
+
+Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPath);
+void shader_free(Shader *shader);
+void shader_bind(Shader *shader);
+
+GLuint shader_get_attrib_loc(Shader *shader, const char *name);
+
+/* File IO helper functions */
+static int load_shader_source(const char *filepath, char **bufferPointer);
+static long get_file_size(const char *filepath);
+static GLint create_shader_program(Shader *shader);
+
+#endif

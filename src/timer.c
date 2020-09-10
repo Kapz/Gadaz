@@ -4,7 +4,7 @@
 
 Timer *timer_create(void){
     Timer *timer;
-    timer = malloc(sizeof(Timer));
+    timer = (Timer *)malloc(sizeof(Timer));
     /* No malloc check needed, we return instantly anyway*/
     return timer;
 }

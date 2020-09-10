@@ -6,9 +6,10 @@
 
 Window *window_create(char *title, int width, int height){
     Window *window;
-    window = malloc(sizeof(Window));
+    window = (Window *)malloc(sizeof(Window));
 
     if(window == NULL){
+        engine_logs("Failed to allocate memory for window object\n");
         return NULL;
     }
 
@@ -34,7 +35,6 @@ void window_free(Window *window){
 
 void window_close(Window *window){
     glfwDestroyWindow(window->handle);
-    free(window);
 }
 
 void window_update(Window *window){
@@ -56,6 +56,7 @@ void window_set_cursor_mode(Window *window, CursorMode mode){
     }
 }
 
+// TODO: Fix this function. Glitched?
 void window_set_fullscreen(Window *window, int value, int width, int height){
     if(value){
         glfwSetWindowMonitor(window->handle, glfwGetPrimaryMonitor(), 0, 0, width, height, GLFW_DONT_CARE);

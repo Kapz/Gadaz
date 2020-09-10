@@ -3,20 +3,17 @@
 
 #include <stdio.h>
 
-#include "window.h"
-#include "input.h"
-#include "timer.h"
-
 #define ENGINE_SUCCES 0
 #define ENGINE_ERROR 1
 
 #define ENGINE_TRUE 1
 #define ENGINE_FALSE 0
 
-/* File descriptor fot debug output*/
+/* File descriptor fot debug output */
 static FILE *debugOutput;
 
 int init_engine(void);
+int engine_init_gl(void);
 int cleanup_engine(void);
 int engine_logs(const char *data);
 
