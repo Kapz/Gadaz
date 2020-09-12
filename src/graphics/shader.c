@@ -1,10 +1,10 @@
 #include "shader.h"
-#include "engine.h"
+#include "../engine.h"
 
 Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPath){
     GLint status;
-    Shader *shader = (Shader *)malloc(sizeof(Shader));
-    if(shader == NULL){
+    Shader *s = (Shader *)malloc(sizeof(Shader));
+    if(s == NULL){
         engine_logs("Failed to allocate memory for shader object\n");
         return NULL;
     }
@@ -27,16 +27,16 @@ Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPa
         return NULL;
     }
 
-    shader->vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(shader->vertexShader, 1, &vertexShaderData, (GLint *)&vertexShaderSize);
-    glCompileShader(shader->vertexShader);
+    s->vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(s->vertexShader, 1, &vertexShaderData, (GLint *)&vertexShaderSize);
+    glCompileShader(s->vertexShader);
     
-    glGetShaderiv(shader->vertexShader, GL_COMPILE_STATUS, &status);
+    glGetShaderiv(s->vertexShader, GL_COMPILE_STATUS, &status);
     if(status == GL_FALSE){
         GLint logSize;
-        glGetShaderiv(shader->vertexShader, GL_INFO_LOG_LENGTH, &logSize);
+        glGetShaderiv(s->vertexShader, GL_INFO_LOG_LENGTH, &logSize);
         char *log = (char *)malloc(logSize);
-        glGetShaderInfoLog(shader->vertexShader, logSize, NULL, log);
+        glGetShaderInfoLog(s->vertexShader, logSize, NULL, log);
         engine_logs("Failed to compile vertex shader: \n");
         engine_logs(log);
         free(log);
@@ -64,88 +64,88 @@ Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPa
         return NULL;
     }
 
-    shader->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(shader->fragmentShader, 1, &fragmentShaderData, (GLint *)&fragmentShaderSize);
-    glCompileShader(shader->fragmentShader);
+    s->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(s->fragmentShader, 1, &fragmentShaderData, (GLint *)&fragmentShaderSize);
+    glCompileShader(s->fragmentShader);
     
-    glGetShaderiv(shader->fragmentShader, GL_COMPILE_STATUS, &status);
+    glGetShaderiv(s->fragmentShader, GL_COMPILE_STATUS, &status);
     if(status == GL_FALSE){
         GLint logSize;
-        glGetShaderiv(shader->fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
+        glGetShaderiv(s->fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
         char *log = (char *)malloc(logSize);
-        glGetShaderInfoLog(shader->fragmentShader, logSize, NULL, log);
+        glGetShaderInfoLog(s->fragmentShader, logSize, NULL, log);
         engine_logs("Failed to compile fragment shader: \n");
         engine_logs(log);
         free(log);
         return NULL;
     }
 
-    if(create_shader_program(shader)){
+    if(create_shader_program(s)){
         return NULL;
     }
 
-    return shader;
+    return s;
 }
 
 Shader *shader_create_s(const GLchar *vertexShaderData, const GLchar *fragmentShaderData){
     GLint status;
-    Shader *shader = (Shader *)malloc(sizeof(Shader));
-    if(shader == NULL){
+    Shader *s = (Shader *)malloc(sizeof(Shader));
+    if(s == NULL){
         engine_logs("Failed to allocate memory for shader object\n");
         return NULL;
     }
 
-    shader->vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(shader->vertexShader, 1, &vertexShaderData, NULL);
-    glCompileShader(shader->vertexShader);
+    s->vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(s->vertexShader, 1, &vertexShaderData, NULL);
+    glCompileShader(s->vertexShader);
     
-    glGetShaderiv(shader->vertexShader, GL_COMPILE_STATUS, &status);
+    glGetShaderiv(s->vertexShader, GL_COMPILE_STATUS, &status);
     if(status == GL_FALSE){
         GLint logSize;
-        glGetShaderiv(shader->vertexShader, GL_INFO_LOG_LENGTH, &logSize);
+        glGetShaderiv(s->vertexShader, GL_INFO_LOG_LENGTH, &logSize);
         char *log = (char *)malloc(logSize);
-        glGetShaderInfoLog(shader->vertexShader, logSize, NULL, log);
+        glGetShaderInfoLog(s->vertexShader, logSize, NULL, log);
         engine_logs("Failed to compile vertex shader: \n");
         engine_logs(log);
         free(log);
         return NULL;
     }
 
-    shader->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(shader->fragmentShader, 1, &fragmentShaderData, NULL);
-    glCompileShader(shader->fragmentShader);
+    s->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(s->fragmentShader, 1, &fragmentShaderData, NULL);
+    glCompileShader(s->fragmentShader);
     
-    glGetShaderiv(shader->fragmentShader, GL_COMPILE_STATUS, &status);
+    glGetShaderiv(s->fragmentShader, GL_COMPILE_STATUS, &status);
     if(status == GL_FALSE){
         GLint logSize;
-        glGetShaderiv(shader->fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
+        glGetShaderiv(s->fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
         char *log = (char *)malloc(logSize);
-        glGetShaderInfoLog(shader->fragmentShader, logSize, NULL, log);
+        glGetShaderInfoLog(s->fragmentShader, logSize, NULL, log);
         engine_logs("Failed to compile fragment shader: \n");
         engine_logs(log);
         free(log);
         return NULL;
     }
 
-    if(create_shader_program(shader)){
+    if(create_shader_program(s)){
         return NULL;
     }
 
-    return shader;
+    return s;
 }
 
-void shader_free(Shader *shader){
-    glDeleteShader(shader->vertexShader);
-    glDeleteShader(shader->fragmentShader);
-    free(shader);
+void shader_free(Shader *s){
+    glDeleteShader(s->vertexShader);
+    glDeleteShader(s->fragmentShader);
+    free(s);
 }
 
-void shader_bind(Shader *shader){
-    glUseProgram(shader->program);
+void shader_bind(Shader *s){
+    glUseProgram(s->program);
 }
 
-GLuint shader_get_attrib_loc(Shader *shader, const char *name){
-    return glGetAttribLocation(shader->program, name);
+GLuint shader_get_attrib_loc(Shader *s, const char *name){
+    return glGetAttribLocation(s->program, name);
 }
 
 static int load_shader_source(const char* filepath, char **buffer){
@@ -192,20 +192,20 @@ static long get_file_size(const char *filepath){
     return fileSize;
 }
 
-static GLint create_shader_program(Shader *shader){
+static GLint create_shader_program(Shader *s){
     GLint status;
 
-    shader->program = glCreateProgram();
-    glAttachShader(shader->program, shader->vertexShader);
-    glAttachShader(shader->program, shader->fragmentShader);
-    glLinkProgram(shader->program);
+    s->program = glCreateProgram();
+    glAttachShader(s->program, s->vertexShader);
+    glAttachShader(s->program, s->fragmentShader);
+    glLinkProgram(s->program);
 
-    glGetProgramiv(shader->program, GL_LINK_STATUS, &status);
+    glGetProgramiv(s->program, GL_LINK_STATUS, &status);
     if(status == GL_FALSE){
         GLint logSize;
-        glGetProgramiv(shader->program, GL_PROGRAM_LENGTH_NV, &logSize);
+        glGetProgramiv(s->program, GL_PROGRAM_LENGTH_NV, &logSize);
         char *log = (char *)malloc(logSize);
-        glGetProgramInfoLog(shader->program, logSize, NULL, log);
+        glGetProgramInfoLog(s->program, logSize, NULL, log);
         engine_logs("Failed to create shader program: ");
         engine_logs(log);
         free(log);

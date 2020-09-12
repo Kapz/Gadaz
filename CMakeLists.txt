@@ -6,8 +6,6 @@ set(CMAKE_BUILD_TYPE Debug)
 file(GLOB_RECURSE sources src/*.c src/*.h)
 list(APPEND sources "main.c")
 
-add_subdirectory(src)
-
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)

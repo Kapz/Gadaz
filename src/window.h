@@ -15,18 +15,18 @@ typedef enum CursorMode{
 
 
 Window *window_create(char *title, int width, int height);
-void window_free(Window *window);
+void window_free(Window *win);
 
-void window_close(Window *window);
-void window_update(Window *window);
+void window_close(Window *win);
+void window_update(Window *win);
 
-void window_make_currect(Window *window);
-void window_set_cursor_mode(Window *window, CursorMode mode);
+void window_make_currect(Window *win);
+void window_set_cursor_mode(Window *win, CursorMode mode);
 
-unsigned int window_get_width(Window *window);
-unsigned int window_get_height(Window *window);
-unsigned int window_get_fullscreen(Window *window);
+unsigned int window_get_width(Window *win);
+unsigned int window_get_height(Window *win);
+unsigned int window_get_fullscreen(Window *win);
 
-int window_should_close(Window *window);
+int window_should_close(Window *win);
 
 #endif

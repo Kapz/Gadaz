@@ -3,31 +3,31 @@
 #include <stdlib.h>
 
 VertexBuffer *vb_create(GLsizeiptr size, const GLvoid *data){
-    VertexBuffer *vertexBuffer;
+    VertexBuffer *buffer;
 
-    vertexBuffer = malloc(sizeof(VertexBuffer));
-    if(vertexBuffer == NULL){
+    buffer = malloc(sizeof(VertexBuffer));
+    if(buffer == NULL){
         engine_logs("Failed to allocate memory for vertex buffer object\n");
         return NULL;
     }
 
-    glGenBuffers(1, &vertexBuffer->vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer->vbo);
+    glGenBuffers(1, &buffer->vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer->vbo);
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 
-    return vertexBuffer;
+    return buffer;
 }
 
-void vb_free(VertexBuffer *vertexBuffer){
-    glDeleteBuffers(1, &vertexBuffer->vbo);
-    free(vertexBuffer);
+void vb_free(VertexBuffer *buffer){
+    glDeleteBuffers(1, &buffer->vbo);
+    free(buffer);
 }
 
 
-void vb_bind(VertexBuffer *vertexBuffer){
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer->vbo);
+void vb_bind(VertexBuffer *buffer){
+    glBindBuffer(GL_ARRAY_BUFFER, buffer->vbo);
 }
 
-void vb_unbind(VertexBuffer *vertexBuffer){
+void vb_unbind(VertexBuffer *buffer){
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

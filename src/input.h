@@ -39,6 +39,6 @@ typedef enum Key{
     KEY_ESCAPE = GLFW_KEY_ESCAPE
 }Key;
 
-int input_is_key_pressed(Window *window, Key key);
+int input_is_key_pressed(Window *win, Key k);
 
 #endif

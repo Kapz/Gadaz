@@ -8,9 +8,9 @@ typedef struct VertexBuffer{
 }VertexBuffer;
 
 VertexBuffer *vb_create(GLsizeiptr size, const GLvoid *data);
-void vb_free(VertexBuffer *vertexBuffer);
+void vb_free(VertexBuffer *buffer);
 
-void vb_bind(VertexBuffer *vertexBuffer);
-void vb_unbind(VertexBuffer *vertexBuffer);
+void vb_bind(VertexBuffer *buffer);
+void vb_unbind(VertexBuffer *buffer);
 
 #endif

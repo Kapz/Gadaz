@@ -6,11 +6,11 @@ typedef struct Timer{
 }Timer;
 
 Timer *timer_create(void);
-void timer_free(Timer *timer);
+void timer_free(Timer *t);
 
-void timer_start(Timer *timer);
-double timer_restart(Timer *timer);
-double timer_get_elapsed_time(Timer *timer);
-double timer_stop(Timer *timer);
+void timer_start(Timer *t);
+double timer_restart(Timer *t);
+double timer_get_elapsed_time(Timer *t);
+double timer_stop(Timer *t);
 
 #endif

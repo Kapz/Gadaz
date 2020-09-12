@@ -66,18 +66,18 @@ void window_set_fullscreen(Window *window, int value, int width, int height){
 }
 
 
-unsigned int window_get_width(Window *window){
+unsigned int window_get_width(Window *win){
     int width;
-    glfwGetWindowSize(window->handle, &width, NULL);
+    glfwGetWindowSize(win->handle, &width, NULL);
     return width;
 }
 
-unsigned int window_get_height(Window *window){
+unsigned int window_get_height(Window *win){
     int height;
-    glfwGetWindowSize(window->handle, NULL, &height);
+    glfwGetWindowSize(win->handle, NULL, &height);
     return height;
 }
 
-int window_should_close(Window *window){
-    return glfwWindowShouldClose(window->handle);
+int window_should_close(Window *win){
+    return glfwWindowShouldClose(win->handle);
 }

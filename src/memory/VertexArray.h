@@ -8,10 +8,10 @@ typedef struct VertexArray{
 }VertexArray;
 
 VertexArray *va_create(void);
-void va_free(VertexArray *vertexArray);
+void va_free(VertexArray *array);
 
-void va_bind(VertexArray *vertexArray);
-void va_unbind(VertexArray *vertexArray);
-void va_attrib_pointer(VertexArray *vertexArray, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
+void va_bind(VertexArray *array);
+void va_unbind(VertexArray *array);
+void va_attrib_pointer(VertexArray *array, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
 
 #endif
