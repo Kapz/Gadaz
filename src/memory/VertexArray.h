@@ -2,6 +2,7 @@
 #define VERTEX_ARRAY_H
 
 #include <GL/glew.h>
+#include "VertexBufferLayout.h"
 
 typedef struct VertexArray{
     GLuint vao;
@@ -12,6 +13,8 @@ void va_free(VertexArray *array);
 
 void va_bind(VertexArray *array);
 void va_unbind(VertexArray *array);
+
+void va_apply_layout(VertexArray *array, VertexBufferLayout *layout);
 void va_attrib_pointer(VertexArray *array, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer);
 
 #endif
