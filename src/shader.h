@@ -11,6 +11,7 @@ typedef struct Shader{
 }Shader;
 
 Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPath);
+Shader *shader_create_s(const GLchar *vertexShaderData, const GLchar *fragmentShaderData);
 void shader_free(Shader *shader);
 void shader_bind(Shader *shader);
 

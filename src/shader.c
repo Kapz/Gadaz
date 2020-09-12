@@ -80,7 +80,54 @@ Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPa
         return NULL;
     }
 
-    if(create_shader_program(shader) == GL_FALSE){
+    if(create_shader_program(shader)){
+        return NULL;
+    }
+
+    return shader;
+}
+
+Shader *shader_create_s(const GLchar *vertexShaderData, const GLchar *fragmentShaderData){
+    GLint status;
+    Shader *shader = (Shader *)malloc(sizeof(Shader));
+    if(shader == NULL){
+        engine_logs("Failed to allocate memory for shader object\n");
+        return NULL;
+    }
+
+    shader->vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(shader->vertexShader, 1, &vertexShaderData, NULL);
+    glCompileShader(shader->vertexShader);
+    
+    glGetShaderiv(shader->vertexShader, GL_COMPILE_STATUS, &status);
+    if(status == GL_FALSE){
+        GLint logSize;
+        glGetShaderiv(shader->vertexShader, GL_INFO_LOG_LENGTH, &logSize);
+        char *log = (char *)malloc(logSize);
+        glGetShaderInfoLog(shader->vertexShader, logSize, NULL, log);
+        engine_logs("Failed to compile vertex shader: \n");
+        engine_logs(log);
+        free(log);
+        return NULL;
+    }
+
+    shader->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(shader->fragmentShader, 1, &fragmentShaderData, NULL);
+    glCompileShader(shader->fragmentShader);
+    
+    glGetShaderiv(shader->fragmentShader, GL_COMPILE_STATUS, &status);
+    if(status == GL_FALSE){
+        GLint logSize;
+        glGetShaderiv(shader->fragmentShader, GL_INFO_LOG_LENGTH, &logSize);
+        char *log = (char *)malloc(logSize);
+        glGetShaderInfoLog(shader->fragmentShader, logSize, NULL, log);
+        engine_logs("Failed to compile fragment shader: \n");
+        engine_logs(log);
+        free(log);
+        return NULL;
+    }
+
+    if(create_shader_program(shader)){
         return NULL;
     }
 
@@ -162,7 +209,7 @@ static GLint create_shader_program(Shader *shader){
         engine_logs("Failed to create shader program: ");
         engine_logs(log);
         free(log);
-        return status;
+        return 1;
     }
     
     return 0;
