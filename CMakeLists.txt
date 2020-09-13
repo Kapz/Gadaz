@@ -15,4 +15,4 @@ add_executable(engine ${sources})
 target_link_libraries(engine glfw)
 target_link_libraries(engine GLEW::GLEW)
 target_link_libraries(engine OpenGL::GL)
-
+target_link_libraries(engine m)
