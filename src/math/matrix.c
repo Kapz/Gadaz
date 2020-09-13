@@ -60,7 +60,7 @@ void mat4_mul(Mat4 *dest, Mat4 *a, Mat4 *b){
     dest->data[15] = a->data[12] * b->data[3] + a->data[13] * b->data[7] + a->data[14] * b->data[11] + a->data[15] * b->data[15];
 }
 
-void mat4_mul_s(Mat4 *dest, Mat4 *a, double b){
+void mat4_mul_s(Mat4 *dest, Mat4 *a, float b){
     dest->data[0] = a->data[0] * b;
     dest->data[1] = a->data[1] * b;
     dest->data[2] = a->data[2] * b;
@@ -92,10 +92,10 @@ void mat4_mul_vec4(Vec4 *dest, Mat4 *a, Vec4 *b){
     b->w = a->data[3] * b->x + a->data[7] * b->y + a->data[11] * b->z + a->data[15] * b->w;
 }
 
-void mat4_rotate(Mat4 *dest, Mat4 *a, double angle, Vec3 *b){
-    double s = sin(angle);
-    double c = cos(angle);
-    double t = 1 - c;
+void mat4_rotate(Mat4 *dest, Mat4 *a, float angle, Vec3 *b){
+    float s = sin(angle);
+    float c = cos(angle);
+    float t = 1 - c;
 
     Vec3 axis;
     Mat4 rotate;

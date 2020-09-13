@@ -175,9 +175,8 @@ void shader_set_uniform_1f(Shader *s, const char *attrib, float p1){
 }
 
 void shader_set_uniform_mat4(Shader *s, const char *attrib, Mat4 p1){
-    //TODO: Check this please ?
     GLint uniLoc = glGetUniformLocation(s->program, attrib);
-    glUniformMatrix4fv(uniLoc, 1, GL_FALSE, (GLfloat *)&p1);
+    glUniformMatrix4fv(uniLoc, 1, GL_FALSE, (GLfloat *) &p1.data);
 }
 
 
