@@ -173,6 +173,36 @@ void mat4_translate(Mat4 *dest, Mat4 *a, Vec3 *b){
     dest->data[15] = a->data[3] * b->x + a->data[7] * b->y + a->data[11] * b->z + a->data[15];
 }
 
+void mat4_look_at(Mat4 *dest, Vec3 eye, Vec3 center, Vec3 up){
+    Vec3 f;
+    vec3_sub(&f, &center, &eye);
+    vec3_normalize(&f, &f);
+
+    Vec3 s;
+    vec3_cross(&s, &up, &f);
+    vec3_normalize(&s, &s);
+
+    Vec3 u;
+    vec3_cross(&u, &f, &s);
+    
+    mat4_identify(&dest);
+    dest->data[0] = s.x;
+    dest->data[1] = s.y;
+    dest->data[2] = s.z;
+    dest->data[3] = 0;
+    dest->data[4] = u.x;
+    dest->data[5] = u.y;
+    dest->data[6] = u.z;
+    dest->data[7] = 0;
+    dest->data[8] = f.x;
+    dest->data[9] = f.y;
+    dest->data[10] = f.z;
+    dest->data[11] = 0;
+    dest->data[12] = -vec3_dot(&s, &eye);
+    dest->data[13] = -vec3_dot(&u, &eye);
+    dest->data[14] = -vec3_dot(&f, &eye);
+}
+
 void mat4_identify(Mat4 *dest){
     dest->data[0] = 1;
     dest->data[1] = 0;
@@ -193,4 +223,57 @@ void mat4_identify(Mat4 *dest){
     dest->data[13] = 0;
     dest->data[14] = 0;
     dest->data[15] = 1;
+}
+
+void mat4_frustum(Mat4 *dest, float left, float right, float bottom, float top, float near, float far){
+    float dsides = (right - left);
+    float dheight = (top - bottom);
+    float ddepth = (far - near);
+
+    dest->data[0] = (2 * near) / dsides;
+    dest->data[1] = 0;
+    dest->data[2] = 0;
+    dest->data[3] = 0;
+    dest->data[4] = 0;
+    dest->data[5] = (2 * near) / dheight;
+    dest->data[6] = 0;
+    dest->data[7] = 0;
+    dest->data[8] = (right + left) / dsides;
+    dest->data[9] = (top + bottom) / dheight;
+    dest->data[10] = -((far + near) / ddepth);
+    dest->data[11] = -1;
+    dest->data[12] = 0;
+    dest->data[13] = 0;
+    dest->data[14] = -((2 * far * near) / ddepth);
+    dest->data[15] = 0;
+}
+
+void mat4_ortho(Mat4 *dest, float left, float right, float bottom, float top, float near, float far){
+    float dsides = (right - left);
+    float dheight = (top - bottom);
+    float ddepth = (far - near);
+
+    dest->data[0] = 2 / dsides;
+    dest->data[1] = 0;
+    dest->data[2] = 0;
+    dest->data[3] = 0;
+    dest->data[4] = 0;
+    dest->data[5] = 2 / dheight;
+    dest->data[6] = 0;
+    dest->data[7] = 0;
+    dest->data[8] = 0;
+    dest->data[9] = 0;
+    dest->data[10] = -2 / ddepth;
+    dest->data[11] = 0;
+    dest->data[12] = -((right + left) / dsides);
+    dest->data[13] = -((top + bottom) / dheight);
+    dest->data[14] = -((far + near) / ddepth);
+    dest->data[15] = 1;
+}
+
+void mat4_perspective(Mat4 *dest, float fovy, float aspect, float near, float far){
+    float top = near * tan(fovy * PI / 360.0);
+    float right = top * aspect;
+
+    mat4_frustum(dest, -right, right, -top, top, near, far);
 }
