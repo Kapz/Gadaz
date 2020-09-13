@@ -1,6 +1,12 @@
 #include "vector.h"
 #include <math.h>
 
+void vec3_set(Vec3 *dest, Vec3 a){
+    dest->x = a.x;
+    dest->y = a.y;
+    dest->z = a.z;
+}
+
 void vec3_add(Vec3 *dest, Vec3 *a, Vec3 *b){
     dest->x = a->x + b->x;
     dest->y = a->y + b->y;

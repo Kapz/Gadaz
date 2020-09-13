@@ -9,6 +9,7 @@ typedef struct Mat4{
     float data[16];
 }Mat4;
 
+void mat4_set(Mat4 *dest, Mat4 *a);
 void mat4_identify(Mat4 *dest);
 
 void mat4_add(Mat4 *dest, Mat4 *a, Mat4 *b);

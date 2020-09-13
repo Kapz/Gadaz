@@ -1,6 +1,25 @@
 #include "matrix.h"
 #include <math.h>
 
+void mat4_set(Mat4 *dest, Mat4 *a){
+    dest->data[0] = a->data[0];
+    dest->data[1] = a->data[1];
+    dest->data[2] = a->data[2];
+    dest->data[3] = a->data[3];
+    dest->data[4] = a->data[4];
+    dest->data[5] = a->data[5];
+    dest->data[6] = a->data[6];
+    dest->data[7] = a->data[7];
+    dest->data[8] = a->data[8];
+    dest->data[9] = a->data[9];
+    dest->data[10] = a->data[10];
+    dest->data[11] = a->data[11];
+    dest->data[12] = a->data[12];
+    dest->data[13] = a->data[13];
+    dest->data[14] = a->data[14];
+    dest->data[15] = a->data[15];
+}
+
 void mat4_add(Mat4 *dest, Mat4 *a, Mat4 *b){
     dest->data[0] = a->data[0] + b->data[0];
     dest->data[1] = a->data[1] + b->data[1];
@@ -100,7 +119,9 @@ void mat4_rotate(Mat4 *dest, Mat4 *a, float angle, Vec3 *b){
     Vec3 axis;
     Mat4 rotate;
     vec3_normalize(&axis, b);
-
+cam->position.x += cam->up.x * cam->speed;
+        cam->position.y += cam->up.y * cam->speed;
+        cam->position.z += cam->up.z * cam->speed;
     rotate.data[0] = b->x * b->x * t + c;
     rotate.data[1] = b->y * b->x * t + b->z * s;
     rotate.data[2] = b->z * b->x * t - b->y * s;
@@ -185,7 +206,7 @@ void mat4_look_at(Mat4 *dest, Vec3 eye, Vec3 center, Vec3 up){
     Vec3 u;
     vec3_cross(&u, &f, &s);
     
-    mat4_identify(&dest);
+    mat4_identify(dest);
     dest->data[0] = s.x;
     dest->data[1] = s.y;
     dest->data[2] = s.z;

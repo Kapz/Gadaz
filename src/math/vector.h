@@ -14,6 +14,8 @@ typedef struct Vec4{
     float w;
 }Vec4;
 
+void vec3_set(Vec3 *dest, Vec3 a);
+
 void vec3_add(Vec3 *dest, Vec3 *a, Vec3 *b);
 void vec3_sub(Vec3 *dest, Vec3 *a, Vec3 *b);
 
