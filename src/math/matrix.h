@@ -1,7 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "Vector.h"
+#include "vector.h"
 
 typedef struct __attribute__((__packed__)) Mat4{
     double data[16];

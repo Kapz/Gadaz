@@ -1,4 +1,4 @@
-#include "VertexArray.h"
+#include "vertexArray.h"
 #include <stdlib.h>
 
 #include "../engine.h"

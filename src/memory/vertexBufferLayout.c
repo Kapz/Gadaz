@@ -1,4 +1,4 @@
-#include "VertexBufferLayout.h"
+#include "vertexBufferLayout.h"
 #include "../engine.h"
 #include <stdlib.h>
 

@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "matrix.h"
 #include <math.h>
 
 void mat4_add(Mat4 *dest, Mat4 *a, Mat4 *b){
@@ -19,7 +19,6 @@ void mat4_add(Mat4 *dest, Mat4 *a, Mat4 *b){
     dest->data[14] = a->data[14] + b->data[14];
     dest->data[15] = a->data[15] + b->data[15];
 }
-
 void mat4_sub(Mat4 *dest, Mat4 *a, Mat4 *b){
     dest->data[0] = a->data[0] - b->data[0];
     dest->data[1] = a->data[1] - b->data[1];

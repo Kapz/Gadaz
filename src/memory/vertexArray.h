@@ -2,7 +2,7 @@
 #define VERTEX_ARRAY_H
 
 #include <GL/glew.h>
-#include "VertexBufferLayout.h"
+#include "vertexBufferLayout.h"
 
 typedef struct VertexArray{
     GLuint vao;
