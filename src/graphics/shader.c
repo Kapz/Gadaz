@@ -148,6 +148,39 @@ GLuint shader_get_attrib_loc(Shader *s, const char *name){
     return glGetAttribLocation(s->program, name);
 }
 
+void shader_set_uniform_3f(Shader *s, const char *attrib, float p1, float p2, float p3){
+    GLint uniLoc = glGetUniformLocation(s->program, attrib);
+    glUniform3f(uniLoc, p1, p2, p3);
+}
+
+void shader_set_uniform_vec3(Shader *s, const char *attrib, Vec3 p1){
+    GLint uniLoc = glGetUniformLocation(s->program, attrib);
+    //TODO: Optimize this? All elements at once?
+    glUniform3f(uniLoc, p1.x, p1.y, p1.z);
+}
+
+void shader_set_uniform_2f(Shader *s, const char *attrib, float p1, float p2){
+    GLint uniLoc = glGetUniformLocation(s->program, attrib);
+    glUniform2f(uniLoc, p1, p2);
+}
+
+void shader_set_uniform_1i(Shader *s, const char *attrib, int p1){
+    GLint uniLoc = glGetUniformLocation(s->program, attrib);
+    glUniform1i(uniLoc, p1);
+}
+
+void shader_set_uniform_1f(Shader *s, const char *attrib, float p1){
+    GLint uniLoc = glGetUniformLocation(s->program, attrib);
+    glUniform1f(uniLoc, p1);
+}
+
+void shader_set_uniform_mat4(Shader *s, const char *attrib, Mat4 p1){
+    //TODO: Check this please ?
+    GLint uniLoc = glGetUniformLocation(s->program, attrib);
+    glUniformMatrix4fv(uniLoc, 1, GL_FALSE, (GLfloat *)&p1);
+}
+
+
 static int load_shader_source(const char* filepath, char **buffer){
     long shaderSourceSize = get_file_size(filepath);
     if(shaderSourceSize == -1){

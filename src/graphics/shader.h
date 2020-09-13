@@ -1,6 +1,8 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include "../math/vector.h"
+#include "../math/matrix.h"
 #include <GL/glew.h>
 #include <stdlib.h>
 
@@ -16,6 +18,13 @@ void shader_free(Shader *s);
 void shader_bind(Shader *s);
 
 GLuint shader_get_attrib_loc(Shader *s, const char *name);
+
+void shader_set_uniform_3f(Shader *s, const char *attrib, float p1, float p2, float p3);
+void shader_set_uniform_vec3(Shader *s, const char *attrib, Vec3 p1);
+void shader_set_uniform_2f(Shader *s, const char *attrib, float p1, float p2);
+void shader_set_uniform_1i(Shader *s, const char *attrib, int p1);
+void shader_set_uniform_1f(Shader *s, const char *attrib, float p1);
+void shader_set_uniform_mat4(Shader *s, const char *attrib, Mat4 p1);
 
 /* File IO helper functions */
 static int load_shader_source(const char *filepath, char **bufferPointer);
