@@ -1,5 +1,6 @@
 #include "vertexBufferLayout.h"
 #include "../engine.h"
+#include "../util.h"
 #include <stdlib.h>
 
 VertexBufferLayout *vb_layout_create(void){
@@ -13,6 +14,7 @@ VertexBufferLayout *vb_layout_create(void){
 
     layout->elements = NULL;
     layout->elementCount = 0;
+    layout->stride = 0;
 
     return layout;
 }
@@ -33,6 +35,7 @@ int vb_layout_push_element(VertexBufferLayout *layout, GLenum type, int amount, 
     element->count = amount;
     element->normalized = normalized;
 
+    layout->stride += util_type_size(element->type) * element->count;
     return 0;
 }
 

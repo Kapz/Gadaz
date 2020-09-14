@@ -12,6 +12,7 @@ typedef struct Element{
 typedef struct VertexBufferLayout{
     Element *elements;
     int elementCount;
+    GLsizei stride;
 }VertexBufferLayout;
 
 

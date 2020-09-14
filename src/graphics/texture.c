@@ -55,6 +55,7 @@ static int load_from_file(Texture *tex, const char *filePath){
     unsigned char *textureData;
     int channelCount;
 
+    stbi_set_flip_vertically_on_load(1);
     textureData = stbi_load(filePath, &tex->width, &tex->height, &channelCount, STBI_rgb);
 
     if(textureData == NULL){
@@ -63,7 +64,7 @@ static int load_from_file(Texture *tex, const char *filePath){
 
     texture_bind(tex);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->width, tex->height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
-
+    glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

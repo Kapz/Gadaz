@@ -35,15 +35,21 @@ void va_unbind(VertexArray *array){
 }
 
 void va_apply_layout(VertexArray *array, VertexBufferLayout *layout){
-    unsigned int stride = 0;
     unsigned int index = 0;
+    unsigned int offset = 0;
     /* Loop through all elements in the layout and
        add them to the VertexArray*/
     for(int i = 0; i < layout->elementCount; i++){
         Element *e = (layout->elements + i);
-        stride += util_type_size(e->type) * e->count;
-        va_attrib_pointer(array, index, e->count, e->type, e->normalized, stride, NULL);
+
+        if(i == 0){
+            va_attrib_pointer(array, index, e->count, e->type, e->normalized, layout->stride, NULL);
+        }else{
+            va_attrib_pointer(array, index, e->count, e->type, e->normalized, layout->stride, (void *)offset);
+        }
+        
         index += 1;
+        offset += util_type_size(e->type) * e->count;
     }
 }
 
