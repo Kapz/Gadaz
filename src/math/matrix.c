@@ -119,9 +119,6 @@ void mat4_rotate(Mat4 *dest, Mat4 *a, float angle, Vec3 *b){
     Vec3 axis;
     Mat4 rotate;
     vec3_normalize(&axis, b);
-cam->position.x += cam->up.x * cam->speed;
-        cam->position.y += cam->up.y * cam->speed;
-        cam->position.z += cam->up.z * cam->speed;
     rotate.data[0] = b->x * b->x * t + c;
     rotate.data[1] = b->y * b->x * t + b->z * s;
     rotate.data[2] = b->z * b->x * t - b->y * s;
