@@ -29,4 +29,6 @@ unsigned int window_get_fullscreen(Window *win);
 
 int window_should_close(Window *win);
 
+static void frame_buffer_callback(GLFWwindow *window, int width, int height);
+
 #endif

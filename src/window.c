@@ -5,10 +5,10 @@
 #include "window.h"
 
 Window *window_create(char *title, int width, int height){
-    Window *window;
-    window = (Window *)malloc(sizeof(Window));
+    Window *win;
+    win = (Window *)malloc(sizeof(Window));
 
-    if(window == NULL){
+    if(win == NULL){
         engine_logs("Failed to allocate memory for window object\n");
         return NULL;
     }
@@ -20,11 +20,13 @@ Window *window_create(char *title, int width, int height){
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-    window->handle = glfwCreateWindow(width, height, title, NULL, NULL);
+    win->handle = glfwCreateWindow(width, height, title, NULL, NULL);
+
+    glfwSetFramebufferSizeCallback(win->handle, frame_buffer_callback);
 
     /* Automatically make new window currect */
-    glfwMakeContextCurrent(window->handle);
-    return window;
+    glfwMakeContextCurrent(win->handle);
+    return win;
 }
 
 void window_free(Window *window){
@@ -80,4 +82,8 @@ unsigned int window_get_height(Window *win){
 
 int window_should_close(Window *win){
     return glfwWindowShouldClose(win->handle);
+}
+
+static void frame_buffer_callback(GLFWwindow *window, int width, int height){
+    glViewport(0, 0, width, height);
 }
