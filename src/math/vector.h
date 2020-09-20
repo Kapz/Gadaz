@@ -1,13 +1,18 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-typedef struct Vec3{
+typedef struct __attribute__((__packed__)){
+    float x;
+    float y;
+}Vec2;
+
+typedef struct __attribute__((__packed__)){
     float x;
     float y;
     float z;
 }Vec3;
 
-typedef struct Vec4{
+typedef struct __attribute__((__packed__)){
     float x;
     float y;
     float z;

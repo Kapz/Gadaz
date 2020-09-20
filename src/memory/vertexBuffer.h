@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 
-typedef struct VertexBuffer{
+typedef struct{
     GLuint vbo;
 }VertexBuffer;
 

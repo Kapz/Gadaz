@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 
-typedef struct ElementBuffer{
+typedef struct{
     GLuint ebo;
 }ElementBuffer;
 

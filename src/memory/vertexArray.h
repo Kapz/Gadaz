@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include "vertexBufferLayout.h"
 
-typedef struct VertexArray{
+typedef struct{
     GLuint vao;
 }VertexArray;
 

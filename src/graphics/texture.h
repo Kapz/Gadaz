@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 
-typedef struct Texture{
+typedef struct{
     GLuint id;
     int width;
     int height;

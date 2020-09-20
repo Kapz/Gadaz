@@ -1,11 +1,19 @@
 #include "timer.h"
+#include "engine.h"
 #include <stdlib.h>
 #include <GLFW/glfw3.h>
 
 Timer *timer_create(void){
     Timer *t;
     t = (Timer *)malloc(sizeof(Timer));
-    /* No malloc check needed, we return instantly anyway*/
+    
+    if(t == NULL){
+        engine_logs("Failed to allocate memory for Timer\n");
+        return NULL;
+    }
+    
+    t->lastTime = 0;
+    
     return t;
 }
 

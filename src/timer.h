@@ -1,7 +1,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-typedef struct Timer{
+typedef struct{
     double lastTime;
 }Timer;
 

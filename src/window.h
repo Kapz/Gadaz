@@ -3,11 +3,11 @@
 
 #include <GLFW/glfw3.h>
 
-typedef struct Window{
+typedef struct{
     GLFWwindow *handle;
 }Window;
 
-typedef enum CursorMode{
+typedef enum{
     NORMAL,
     HIDDEN,
     DISABLED

@@ -3,13 +3,13 @@
 
 #include <GL/glew.h>
 
-typedef struct Element{
+typedef struct{
     GLenum type;
     int count;
     GLboolean normalized;
 }Element;
 
-typedef struct VertexBufferLayout{
+typedef struct{
     Element *elements;
     int elementCount;
     GLsizei stride;

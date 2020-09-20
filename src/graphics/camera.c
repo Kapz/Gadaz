@@ -40,29 +40,39 @@ void camera_update(Camera *cam, Window *window){
         cam->position.x += cam->speed * cam->front.x;
         cam->position.y += cam->speed * cam->front.y;
         cam->position.z += cam->speed * cam->front.z;
-    }else if(input_is_key_pressed(window, KEY_W)){
+    }
+    
+    if(input_is_key_pressed(window, KEY_W)){
         cam->position.x -= cam->speed * cam->front.x;
         cam->position.y -= cam->speed * cam->front.y;
         cam->position.z -= cam->speed * cam->front.z;
-    }else if(input_is_key_pressed(window, KEY_D)){
+    }
+    
+    if(input_is_key_pressed(window, KEY_D)){
         Vec3 x;
         vec3_cross(&x, &cam->front, &cam->up);
         vec3_normalize(&x, &x);
         cam->position.x -= cam->speed * x.x;
         cam->position.y -= cam->speed * x.y;
         cam->position.z -= cam->speed * x.z;
-    }else if(input_is_key_pressed(window, KEY_A)){
+    }
+    
+    if(input_is_key_pressed(window, KEY_A)){
         Vec3 x;
         vec3_cross(&x, &cam->front, &cam->up);
         vec3_normalize(&x, &x);
         cam->position.x += cam->speed * x.x;
         cam->position.y += cam->speed * x.y;
         cam->position.z += cam->speed * x.z;
-    }else if(input_is_key_pressed(window, KEY_SPACE)){
+    }
+    
+    if(input_is_key_pressed(window, KEY_SPACE)){
         cam->position.x += cam->up.x * cam->speed;
         cam->position.y += cam->up.y * cam->speed;
         cam->position.z += cam->up.z * cam->speed;
-    }else if(input_is_key_pressed(window, KEY_SHIFT_LEFT)){
+    }
+    
+    if(input_is_key_pressed(window, KEY_SHIFT_LEFT)){
         cam->position.x -= cam->up.x * cam->speed;
         cam->position.y -= cam->up.y * cam->speed;
         cam->position.z -= cam->up.z * cam->speed;

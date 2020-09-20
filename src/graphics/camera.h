@@ -5,7 +5,7 @@
 #include "../math/matrix.h"
 #include "../window.h"
 
-typedef struct Camera{
+typedef struct{
     Mat4 view;
     Vec3 position;
     Vec3 front;

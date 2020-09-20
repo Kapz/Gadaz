@@ -144,6 +144,10 @@ void shader_bind(Shader *s){
     glUseProgram(s->program);
 }
 
+void shader_unbind(Shader *s){
+    glUseProgram(0);
+}
+
 GLuint shader_get_attrib_loc(Shader *s, const char *name){
     return glGetAttribLocation(s->program, name);
 }

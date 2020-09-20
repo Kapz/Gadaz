@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <stdlib.h>
 
-typedef struct Shader{
+typedef struct{
     GLuint vertexShader;
     GLuint fragmentShader;
     GLuint program;
@@ -16,6 +16,7 @@ Shader *shader_create(const char *vertexShaderPath, const char *fragmentShaderPa
 Shader *shader_create_s(const GLchar *vertexShaderData, const GLchar *fragmentShaderData);
 void shader_free(Shader *s);
 void shader_bind(Shader *s);
+void shader_unbind(Shader *s);
 
 GLuint shader_get_attrib_loc(Shader *s, const char *name);
 
