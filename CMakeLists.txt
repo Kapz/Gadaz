@@ -11,6 +11,8 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(ASSIMP REQUIRED)
 
+include_directories(${ASSIMP_INCLUDE_DIR})
+
 add_executable(engine ${sources})
 
 target_link_libraries(engine glfw)
